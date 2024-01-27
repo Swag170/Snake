@@ -6,6 +6,7 @@
         </title>
         <link rel="stylesheet" href="snake_game_style.css"/>
         
+        <!-- Linking to pixel font -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500&display=swap" rel="stylesheet">
@@ -17,27 +18,38 @@
         </style>
     </head>
     <body>
-        <div class="row top">
-            <div class="col-12">
-                <h1 id="title_text">SNAKE GAME</h1>
+        <main>
+            <div class="row top">
+                <div class="col-12">
+                    <h1 id="title_text">SNAKE GAME</h1>
+                </div>
             </div>
-        </div>
 
-        
-        <div class="row" >
-            <div class="col-12">
-                <img id="downloadIcon" src="download.png" alt="download icon" onclick="download()"/>
-                <h2 id="download">Download and Play!</h2>
+            
+            <div class="row" >
+                <div class="col-12">
+                    <img id="downloadIcon" src="download.png" alt="download icon" onclick="download()"/>
+                    <h2 id="download">Download and Play!</h2>
+                </div>
             </div>
-        </div>
+        </main>
         
+        <footer>
+            <div class="row">
+                <div class="col-12">
+                    <h3 id="authors">Developed by Daemon Lewis, Brian Usher, Kolby Cyra, Alexander Ross, and Keona Gagnier</h3>
+            
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <time>
+                        <p>Copyright Jan 20 2024</p>
+                    </time>
+                </div>
+            </div>
+        </footer>
 
-        <div class="row">
-            <div class="col-12">
-                <h3 id="authors">Developed by Daemon Lewis, Brian Usher, Kolby Cyra, Alexander Ross, and Keona Gagnier</h3>
-        
-            </div>
-        </div>
         <script>
 
             function download(){
