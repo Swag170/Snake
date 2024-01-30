@@ -49,15 +49,15 @@ public class Snake {
                 dealWithKeyPress(getSnakeY()-1, getSnakeX(), snake);
               }
               else if (keyCode == KeyEvent.VK_DOWN) {
-                 System.out.println("Down Arrrow-Key is Released!");
+                 System.out.println("Down Arrow-Key is Released!");
                  dealWithKeyPress(getSnakeY()+1, getSnakeX(), snake);
               }
               else if (keyCode == KeyEvent.VK_LEFT) {
-                 System.out.println("Left Arrrow-Key is Released!");
+                 System.out.println("Left Arrow-Key is Released!");
                  dealWithKeyPress(getSnakeY(), getSnakeX()-1, snake);
               }
               else if (keyCode == KeyEvent.VK_RIGHT) {
-                System.out.println("Right Arrrow-Key is Released!");
+                System.out.println("Right Arrow-Key is Released!");
                 dealWithKeyPress(getSnakeY(), getSnakeX()+1, snake);
               }
             }
@@ -72,19 +72,15 @@ public class Snake {
         //If snake collides with wall, 
         if(snake_x < 0 || snake_x > 19 || snake_y < 0 || snake_y > 19) {
         	System.out.println("You crashed into a wall, Game Over!");
-        	System.out.println("Your snake reached length " + (int)(snake.size()-1));
-        	System.exit(0);
+        	endGame(snake);
         
         }else if(selfCrash(snake_y, snake_x)) {
         	System.out.println("You crashed into yourself, Game Over!");
-        	System.out.println("Your snake reached length " + (int)(snake.size()-1));
-        	System.exit(0);
+        	endGame(snake);
         }else {
         	//grow snake if the snake collides with food
      	   if(foodCollision(snake_y, snake_x)) {
-     		   growSnake(snake);
-     		   foodCounter++;
-     		   spawnFood();
+     		   handleFoodCollision(snake);
      	   }
             moveSnakeByKey(snake_y, snake_x);
             snake.removeLast();
@@ -92,6 +88,17 @@ public class Snake {
             displayBoard();
         }
     }
+
+	private static void endGame(LinkedList<snakeObj> snake) {
+		System.out.println("Your snake reached length " + (int)(snake.size()-1));
+		System.exit(0);
+	}
+
+	private static void handleFoodCollision(LinkedList<snakeObj> snake) {
+		   growSnake(snake);
+		   foodCounter++;
+		   spawnFood();
+	}
     
     public static boolean selfCrash(int snake_y, int snake_x) {
     	return maze[snake_y][snake_x] == ".";
