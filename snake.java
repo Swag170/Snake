@@ -28,11 +28,6 @@ public class Snake {
         displayBoard();
         System.err.println();
 
-
-        //int snakeX = 4;
-        //int snakeY = 3;
-
-        //LinkedList<String> snake = new LinkedList<String>();
         LinkedList<snakeObj> snake = new LinkedList<snakeObj>();
         maze[snakeY][snakeX] = "S";
         snakeObj body = new snakeObj(); body.addSnake(snakeY, snakeX);
@@ -76,16 +71,15 @@ public class Snake {
         
         //If snake collides with wall, 
         if(snake_x < 0 || snake_x > 19 || snake_y < 0 || snake_y > 19) {
-        	
         	System.out.println("You crashed into a wall, Game Over!");
         	System.exit(0);
         
-        }else if(checkForSelfCrash(snake_y, snake_x)) {
+        }else if(selfCrash(snake_y, snake_x)) {
         	System.out.println("You crashed into yourself, Game Over!");
         	System.exit(0);
         }else {
         	//grow snake if the snake collides with food
-     	   if(checkFoodCollision(snake_y, snake_x)) {
+     	   if(foodCollision(snake_y, snake_x)) {
      		   growSnake(snake);
      		   foodCounter++;
      		   spawnFood();
@@ -97,11 +91,11 @@ public class Snake {
         }
     }
     
-    public static boolean checkForSelfCrash(int snake_y, int snake_x) {
+    public static boolean selfCrash(int snake_y, int snake_x) {
     	return maze[snake_y][snake_x] == ".";
     }
     
-    public static boolean checkFoodCollision(int snake_y, int snake_x) {
+    public static boolean foodCollision(int snake_y, int snake_x) {
     	return maze[snake_y][snake_x] == "F";
     }
     
@@ -183,7 +177,7 @@ public class Snake {
 }
 
 
-class snakeObj {     //stated coding at 1pm
+class snakeObj {     //started coding at 1pm
     int x;
     int y;
     String type = ".";
