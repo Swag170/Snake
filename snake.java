@@ -74,10 +74,12 @@ public class Snake {
         body0.addSnake(getSnakeY(), getSnakeX());
         snake.addFirst(body0);
         
-        //if snake goes too far left, game over!
-        if(snake_x < 0) {
+        //If snake collides with wall, 
+        if(snake_x < 0 || snake_x > 19 || snake_y < 0 || snake_y > 19) {
+        	
         	System.out.println("You crashed into a wall, Game Over!");
         	System.exit(0);
+        
         }else if(checkForSelfCrash(snake_y, snake_x)) {
         	System.out.println("You crashed into yourself, Game Over!");
         	System.exit(0);
