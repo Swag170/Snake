@@ -51,115 +51,48 @@ public class Snake {
               int keyCode = e.getKeyCode();
               if (keyCode == KeyEvent.VK_UP) {
                 System.out.println("Up Arrow-Key is Released!");
-                snakeObj body0 = new snakeObj();
-                body0.addSnake(getSnakeY(), getSnakeX());
-                snake.addFirst(body0);
-                
-                //if snake goes too far up, the game will end. 
-                if(getSnakeY() - 1 < 0) {
-                	System.out.println("You crashed into a wall, Game Over!");
-                	System.exit(0);
-                }else if(checkForSelfCrash(getSnakeY()-1, getSnakeX())) {
-                	System.out.println("You crashed into yourself, Game Over!");
-                	System.exit(0);
-                }else {
-                	//grow snake if the snake collides with food
-             	    if(checkFoodCollision(getSnakeY()-1, getSnakeX())) {
-             		   growSnake(snake);
-             		   spawnFood();
-             	    }
-                	//otherwise keep playing
-	                moveSnakeByKey(getSnakeY() - 1, getSnakeX());
-	                snake.removeLast();
-	                AddSnakeToBoard(snake);
-	                displayBoard();
-                }
-                
+                dealWithKeyPress(getSnakeY()-1, getSnakeX(), snake);
               }
               else if (keyCode == KeyEvent.VK_DOWN) {
-                System.out.println("Down Arrrow-Key is Released!");
-                //moveSnakeByKey(getSnakeX(),getSnakeY()+1);
-                snakeObj body0 = new snakeObj();
-                body0.addSnake(getSnakeY(), getSnakeX());
-                snake.addFirst(body0);
-                
-                //if snake goes too far down, the game will end.
-                if(getSnakeY() + 1 > size-1) {
-                	System.out.println("You crashed into a wall, Game Over!");
-                	System.exit(0);
-                }else if(checkForSelfCrash(getSnakeY()+1, getSnakeX())) {
-                	System.out.println("You crashed into yourself, Game Over!");
-                	System.exit(0);
-                }else {
-                	//grow snake if the snake collides with food
-             	    if(checkFoodCollision(getSnakeY()+1, getSnakeX())) {
-             		   growSnake(snake);
-             		   spawnFood();
-             	    }
-	                moveSnakeByKey(getSnakeY() + 1, getSnakeX());
-	                snake.removeLast();
-	                AddSnakeToBoard(snake);
-	                displayBoard();
-                }
+                 System.out.println("Down Arrrow-Key is Released!");
+                 dealWithKeyPress(getSnakeY()+1, getSnakeX(), snake);
               }
               else if (keyCode == KeyEvent.VK_LEFT) {
-                System.out.println("Left Arrrow-Key is Released!");
-                //moveSnakeByKey(getSnakeX()-1,getSnakeY());
-                snakeObj body0 = new snakeObj();
-                body0.addSnake(getSnakeY(), getSnakeX());
-                snake.addFirst(body0);
-                
-                //if snake goes too far left, game over!
-                if(getSnakeX() - 1 < 0) {
-                	System.out.println("You crashed into a wall, Game Over!");
-                	System.exit(0);
-                }else if(checkForSelfCrash(getSnakeY(), getSnakeX()-1)) {
-                	System.out.println("You crashed into yourself, Game Over!");
-                	System.exit(0);
-                }else {
-                	//grow snake if the snake collides with food
-             	   if(checkFoodCollision(getSnakeY(), getSnakeX()-1)) {
-             		   growSnake(snake);
-             		   spawnFood();
-             	   }
-	                moveSnakeByKey(getSnakeY(), getSnakeX() - 1);
-	                snake.removeLast();
-	                AddSnakeToBoard(snake);
-	                displayBoard();
-                }
+                 System.out.println("Left Arrrow-Key is Released!");
+                 dealWithKeyPress(getSnakeY(), getSnakeX()-1, snake);
               }
               else if (keyCode == KeyEvent.VK_RIGHT) {
-               System.out.println("Right Arrrow-Key is Released!");
-               //moveSnakeByKey(getSnakeX(),getSnakeY())
-
-               snakeObj body0 = new snakeObj();
-               body0.addSnake(getSnakeY(), getSnakeX());
-               snake.addFirst(body0);
-               
-               //if snake goes too far right, game over!
-               if(getSnakeX() + 1 > size-1) {
-            	   System.out.println("You crashed into a wall, Game Over!");
-            	   System.exit(0);
-               }else if(checkForSelfCrash(getSnakeY(), getSnakeX()+1)) {
-               	   System.out.println("You crashed into yourself, Game Over!");
-               	   System.exit(0);
-               }else {
-            	   //grow snake if the snake collides with food
-            	   if(checkFoodCollision(getSnakeY(), getSnakeX()+1)) {
-            		   growSnake(snake);
-            		   spawnFood();
-            	   }
-	               moveSnakeByKey(getSnakeY(), getSnakeX() + 1);
-	               snake.removeLast();
-	               AddSnakeToBoard(snake);
-	               //snake.clear();
-	               displayBoard();
-               }
+                System.out.println("Right Arrrow-Key is Released!");
+                dealWithKeyPress(getSnakeY(), getSnakeX()+1, snake);
               }
             }
           });
+    }
+    
+    public static void dealWithKeyPress(int snake_y, int snake_x, LinkedList<snakeObj> snake) {
+    	snakeObj body0 = new snakeObj();
+        body0.addSnake(getSnakeY(), getSnakeX());
+        snake.addFirst(body0);
         
-
+        //if snake goes too far left, game over!
+        if(snake_x < 0) {
+        	System.out.println("You crashed into a wall, Game Over!");
+        	System.exit(0);
+        }else if(checkForSelfCrash(snake_y, snake_x)) {
+        	System.out.println("You crashed into yourself, Game Over!");
+        	System.exit(0);
+        }else {
+        	//grow snake if the snake collides with food
+     	   if(checkFoodCollision(snake_y, snake_x)) {
+     		   growSnake(snake);
+     		   foodCounter++;
+     		   spawnFood();
+     	   }
+            moveSnakeByKey(snake_y, snake_x);
+            snake.removeLast();
+            AddSnakeToBoard(snake);
+            displayBoard();
+        }
     }
     
     public static boolean checkForSelfCrash(int snake_y, int snake_x) {
@@ -178,35 +111,35 @@ public class Snake {
     }
 
     public static int getSnakeX(){
-OAOA        return snakeX;
-OA    }
+        return snakeX;
+    }
 
-OA    public static int getSnakeY(){
-OA        return snakeY;
-OA    }
-OA    
-OA    public static void makeBoard() {
+    public static int getSnakeY(){
+        return snakeY;
+    }
+    
+    public static void makeBoard() {
         for (int i =0; i < size; i++) {
-OA            for(int j = 0; j < size; j++) {
+            for(int j = 0; j < size; j++) {
                 maze[i][j] = "0";
             }
-OA        }
-OA    }
+        }
+    }
     
     private static void spawnFood() {
     	Random rand = new Random();
-OA    	boolean whenFoodPlaced = false;
+    	boolean whenFoodPlaced = false;
     	while(!whenFoodPlaced) {
     		int randX = rand.nextInt(size);
         	int randY = rand.nextInt(size);
-OA    		if (maze[randX][randY] == "0") {
+    		if (maze[randX][randY] == "0") {
     			maze[randX][randY] = "F";
     			foodRows = randX;
     			foodCols = randY;
     			whenFoodPlaced = true;
     		}
     	}
-OA    }
+    }
     
     public static void addSnake() { 
         int snakeSize = 3;
@@ -221,7 +154,7 @@ public class Snake {
         for(int i =0; i<snake.size(); i++){
             maze[snake.get(i).y][snake.get(i).x] = snake.get(i).type;
         }
-OA        
+        
         //this code makes it so it does not grow indefinitely
         snakeObj lastBodySegment = snake.getLast();
         maze[lastBodySegment.y][lastBodySegment.x] = "0";
@@ -241,7 +174,7 @@ public class Snake {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 System.out.print(maze[i][j] + " ");
-OA            }
+            }
             System.out.println();
         }
     }
