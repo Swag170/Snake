@@ -72,10 +72,12 @@ public class Snake {
         //If snake collides with wall, 
         if(snake_x < 0 || snake_x > 19 || snake_y < 0 || snake_y > 19) {
         	System.out.println("You crashed into a wall, Game Over!");
+        	System.out.println("Your snake reached length " + (int)(snake.size()-1));
         	System.exit(0);
         
         }else if(selfCrash(snake_y, snake_x)) {
         	System.out.println("You crashed into yourself, Game Over!");
+        	System.out.println("Your snake reached length " + (int)(snake.size()-1));
         	System.exit(0);
         }else {
         	//grow snake if the snake collides with food
