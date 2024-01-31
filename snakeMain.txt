@@ -100,13 +100,6 @@ public class snake {
     	snakeObj body0 = new snakeObj();
         body0.addSnake(getSnakeY(), getSnakeX());
         snake.addFirst(body0);
-        if(foodCollision(snake_y, snake_x)) {
-            growSnake(snake);
-            foodCounter++;
-            spawnFood();
-            score += 10; // Increment the score by 10 when the snake eats food
-            updateScoreLabel(); // Update the score label on the GUI
-        }
         //If snake collides with wall, 
         if(snake_x < 0 || snake_x > 19 || snake_y < 0 || snake_y > 19) {
         	System.out.println("You crashed into a wall, Game Over!");
@@ -121,6 +114,8 @@ public class snake {
      		   growSnake(snake);
      		   foodCounter++;
      		   spawnFood();
+     		  score += 10; // Increment the score by 10 when the snake eats food
+              updateScoreLabel(); // Update the score label on the GUI
      	   }
             moveSnakeByKey(snake_y, snake_x);
             snake.removeLast();
